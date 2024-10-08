@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор площі кола</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #333;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #4caf50;
+        }
+        .circle {
+            margin-top: 30px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #4caf50;
+            display: inline-block;
+            position: relative;
+        }
+        .circle p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+    <script>
+        function calculateArea(radius) {
+            return Math.PI * Math.pow(radius, 2);
+        }
+
+        function showArea() {
+            let radius = parseFloat(document.getElementById("radius").value);
+            
+            if (isNaN(radius) || radius <= 0) {
+                document.getElementById('result').innerHTML = "Введіть коректний радіус!";
+                return;
+            }
+
+            let area = calculateArea(radius).toFixed(2);
+            document.getElementById('result').innerHTML = `Площа кола з радіусом ${radius} дорівнює: ${area} кв. одиниць`;
+
+            let circle = document.getElementById('circle');
+            circle.style.width = (radius * 10) + "px";
+            circle.style.height = (radius * 10) + "px";
+            circle.querySelector('p').innerHTML = `r = ${radius}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Калькулятор площі кола</h1>
+
+    <p>Введіть радіус кола:</p>
+    <input type="number" id="radius" placeholder="Радіус" min="1">
+    <button onclick="showArea()">Розрахувати площу</button>
+
+    <p id="result"></p>
+
+    <div class="circle" id="circle">
+        <p>r = 0</p>
+    </div>
+
+</body>
+</html>
